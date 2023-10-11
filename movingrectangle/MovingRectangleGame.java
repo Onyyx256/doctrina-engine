@@ -24,7 +24,7 @@ public class MovingRectangleGame extends Game {
         if (gamePad.isQuitPressed()) {
             stop();
         }
-        player.update();
+        player.update(gamePad.isSprintPressed());
         npc.update();
     }
 

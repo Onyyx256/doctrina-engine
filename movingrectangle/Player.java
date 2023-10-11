@@ -19,15 +19,15 @@ public class Player {
         this.gamePad = gamePad;
     }
 
-    public void update() {
+    public void update(int speedMultiplicator) {
         if (gamePad.isDownPressed()) {
-            y += speed;
+            y += speed * speedMultiplicator;
         } else if (gamePad.isUpPressed()) {
-            y -= speed;
+            y -= speed * speedMultiplicator;
         } else if (gamePad.isLeftPressed()) {
-            x -= speed;
+            x -= speed * speedMultiplicator;
         } else if (gamePad.isRightPressed()) {
-            x += speed;
+            x += speed * speedMultiplicator;
         }
     }
 

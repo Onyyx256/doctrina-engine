@@ -26,8 +26,7 @@ public abstract class Controller implements KeyListener {
     }
 
     public boolean isKeyPressed(int keyCode) {
-        return pressedKeys.containsKey(keyCode)
-                && pressedKeys.get(keyCode);
+        return pressedKeys.containsKey(keyCode) && pressedKeys.get(keyCode);
     }
 
     @Override
