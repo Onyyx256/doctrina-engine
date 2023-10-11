@@ -8,11 +8,11 @@ public class GamePad extends MovementController {
 
     private int quitKey = KeyEvent.VK_Q;
 
-    private int sprintKey = KeyEvent.VK_SPACE;
+    private int dashKey = KeyEvent.VK_SPACE;
 
     public GamePad() {
         bindKey(quitKey);
-        bindKey(sprintKey);
+        bindKey(dashKey);
     }
 
     public boolean isQuitPressed() {
@@ -20,6 +20,6 @@ public class GamePad extends MovementController {
     }
 
     public int isSprintPressed() {
-        return isKeyPressed(sprintKey)? 3 : 1;
+        return isKeyPressed(dashKey)? 50 : 1;
     }
 }

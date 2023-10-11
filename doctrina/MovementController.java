@@ -8,6 +8,7 @@ public class MovementController extends Controller {
     private int downKey = KeyEvent.VK_DOWN;
     private int rightKey = KeyEvent.VK_RIGHT;
     private int leftKey = KeyEvent.VK_LEFT;
+    private int dashKey = KeyEvent.VK_SPACE;
 
     public MovementController() {
         bindKey(upKey);

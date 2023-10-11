@@ -1,7 +1,6 @@
 package movingrectangle;
 
 import doctrina.Canvas;
-import doctrina.Controller;
 
 import java.awt.*;
 
@@ -19,15 +18,15 @@ public class Player {
         this.gamePad = gamePad;
     }
 
-    public void update(int speedMultiplicator) {
+    public void update(int dashLength) {
         if (gamePad.isDownPressed()) {
-            y += speed * speedMultiplicator;
+            y += speed + dashLength;
         } else if (gamePad.isUpPressed()) {
-            y -= speed * speedMultiplicator;
+            y -= speed + dashLength;
         } else if (gamePad.isLeftPressed()) {
-            x -= speed * speedMultiplicator;
+            x -= speed + dashLength;
         } else if (gamePad.isRightPressed()) {
-            x += speed * speedMultiplicator;
+            x += speed + dashLength;
         }
     }
 
