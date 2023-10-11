@@ -61,4 +61,10 @@ public class MovementController extends Controller {
         bindKey(keyCode);
         this.leftKey = keyCode;
     }
+
+    public void setDashKey(int keyCode) {
+        removeKey(dashKey);
+        bindKey(keyCode);
+        this.dashKey = keyCode;
+    }
 }
