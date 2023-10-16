@@ -1,19 +1,18 @@
 package footprint;
 
 import doctrina.Canvas;
+import doctrina.MovableEntity;
+
 import java.awt.*;
 
-public class Player {
+public class Player extends MovableEntity {
 
     private GamePad gamePad;
-    private int x;
-    private int y;
-    private int speed;
 
     public Player(GamePad gamePad) {
-        x = 200;
-        y = 200;
-        speed = 3;
+        teleport(200, 200);
+        setDimension(20, 60);
+        setSpeed(3);
         this.gamePad = gamePad;
     }
 
@@ -22,18 +21,12 @@ public class Player {
     }
 
     public void update() {
-        if (gamePad.isDownPressed()) {
-            y += speed;
-        } else if (gamePad.isUpPressed()) {
-            y -= speed;
-        } else if (gamePad.isLeftPressed()) {
-            x -= speed;
-        } else if (gamePad.isRightPressed()) {
-            x += speed;
+        if (gamePad.isMoving()) {
+            move(gamePad.getDirection());
         }
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawRectangle(x, y, 20, 60, Color.WHITE);
+        canvas.drawRectangle(this, Color.WHITE);
     }
 }

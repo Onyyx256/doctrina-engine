@@ -21,6 +21,22 @@ public class MovementController extends Controller {
         return isKeyPressed(leftKey);
     }
 
+    public Direction getDirection() {
+        if (isLeftPressed()) {
+            return Direction.LEFT;
+        }
+        if (isRightPressed()) {
+            return Direction.RIGHT;
+        }
+        if (isUpPressed()) {
+            return Direction.UP;
+        }
+        if (isDownPressed()) {
+            return Direction.DOWN;
+        }
+        return null;
+    }
+
     public boolean isRightPressed() {
         return isKeyPressed(rightKey);
     }
