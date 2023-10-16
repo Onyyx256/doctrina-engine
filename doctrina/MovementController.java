@@ -17,6 +17,13 @@ public class MovementController extends Controller {
         bindKey(rightKey);
     }
 
+    public void useWASDKey() {
+        setUpKey(KeyEvent.VK_W);
+        setDownKey(KeyEvent.VK_S);
+        setRightKey(KeyEvent.VK_A);
+        setLeftKey(KeyEvent.VK_D);
+    }
+
     public boolean isLeftPressed() {
         return isKeyPressed(leftKey);
     }

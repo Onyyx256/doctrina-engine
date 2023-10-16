@@ -1,0 +1,41 @@
+package tank;
+
+import doctrina.Canvas;
+import doctrina.ControllableEntity;
+import doctrina.MovementController;
+
+import java.awt.*;
+
+public class Tank extends ControllableEntity {
+    private int cooldown;
+
+    public Tank(MovementController controller) {
+        super(controller);
+        setDimension(30, 30);
+        setSpeed(3);
+        teleport(100, 100);
+    }
+
+    public Missile fire() {
+        cooldown = 50;
+        return new Missile(this);
+    }
+
+    public boolean canFire() {
+        return cooldown == 0;
+    }
+
+    @Override
+    public void update() {
+        moveWithController();
+        cooldown--;
+        if (cooldown < 0) {
+            cooldown = 0;
+        }
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        canvas.drawRectangle(this, Color.GREEN);
+    }
+}
