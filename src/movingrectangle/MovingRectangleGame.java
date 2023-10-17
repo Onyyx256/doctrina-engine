@@ -28,9 +28,10 @@ public class MovingRectangleGame extends Game {
     }
 
     @Override
-    protected void draw(Canvas canvas) {
+    protected void draw(doctrina.Canvas canvas) {
         canvas.drawRectangle(0, 0, 800, 600, Color.BLUE);
         player.draw(canvas);
         npc.draw(canvas);
     }
+
 }

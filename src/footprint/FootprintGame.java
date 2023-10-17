@@ -38,14 +38,14 @@ public class FootprintGame extends Game {
     }
 
     @Override
-    protected void draw(java.awt.Canvas canvas) {
+    protected void draw(doctrina.Canvas canvas) {
         canvas.drawRectangle(0, 0, 800, 600, Color.BLUE);
         drawFootprints(canvas);
         playerOne.draw(canvas);
         playerTwo.draw(canvas);
     }
 
-    private void drawFootprints(Canvas canvas) {
+    private void drawFootprints(doctrina.Canvas canvas) {
         for (Footprint footprint : footprints) {
             footprint.draw(canvas);
         }

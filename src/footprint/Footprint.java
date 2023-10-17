@@ -13,7 +13,7 @@ public class Footprint extends StaticEntity {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(doctrina.Canvas canvas) {
         Color color = new Color(getRandomValue(),
                 getRandomValue(), getRandomValue());
         canvas.drawRectangle(this, color);

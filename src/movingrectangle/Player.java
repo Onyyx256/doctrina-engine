@@ -28,7 +28,7 @@ public class Player {
         }
     }
 
-    public void draw(Canvas canvas) {
+    public void draw(doctrina.Canvas canvas) {
         canvas.drawRectangle(x, y, 20, 60, Color.WHITE);
     }
 }

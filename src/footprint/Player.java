@@ -25,7 +25,7 @@ public class Player extends ControllableEntity {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(doctrina.Canvas canvas) {
         canvas.drawRectangle(this, Color.WHITE);
     }
 }

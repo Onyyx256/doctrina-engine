@@ -46,7 +46,7 @@ public class Npc {
         }
     }
 
-    public void draw(Canvas canvas) {
+    public void draw(doctrina.Canvas canvas) {
         canvas.drawRectangle(x, y, 10, 10, Color.YELLOW);
     }
 }

@@ -25,11 +25,6 @@ public class Missile extends MovableEntity {
         }
     }
 
-    @Override
-    public void draw(Canvas canvas) {
-        canvas.drawRectangle(this, Color.YELLOW);
-    }
-
     private void initialize(Tank tank) {
         if (tankDirection == Direction.RIGHT) {
             teleport(tank.getX() + tank.getWidth() + 1, tank.getY() + 15 - 2);
@@ -44,5 +39,10 @@ public class Missile extends MovableEntity {
             teleport(tank.getX() + 15 - 2, tank.getY() - 9);
             setDimension(4, 8);
         }
+    }
+
+    @Override
+    public void draw(doctrina.Canvas canvas) {
+        canvas.drawRectangle(this, Color.YELLOW);
     }
 }

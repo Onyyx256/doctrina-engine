@@ -12,8 +12,9 @@ public class Brick extends StaticEntity {
         teleport(x, y);
         CollidableRepository.getInstance().registerEntity(this);
     }
+
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(doctrina.Canvas canvas) {
         canvas.drawRectangle(this, Color.WHITE);
     }
 }
