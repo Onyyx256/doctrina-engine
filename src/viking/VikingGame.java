@@ -8,6 +8,7 @@ public class VikingGame extends Game {
     private Player player;
     private GamePad gamePad;
     private World world;
+    private Tree tree;
     @Override
     protected void initialize() {
         gamePad = new GamePad();
@@ -15,6 +16,8 @@ public class VikingGame extends Game {
         player.teleport(200, 200);
         world = new World();
         world.load();
+        tree = new Tree();
+        tree.teleport(300, 300);
     }
 
     @Override
@@ -28,6 +31,13 @@ public class VikingGame extends Game {
     @Override
     protected void draw(Canvas canvas) {
         world.draw(canvas);
-        player.draw(canvas);
+        // tree height (80) - max for layer switch (28)
+        if (player.getY() < tree.getY() + 52) {
+            player.draw(canvas);
+            tree.draw(canvas);
+        } else {
+            tree.draw(canvas);
+            player.draw(canvas);
+        }
     }
 }
