@@ -1,5 +1,6 @@
 package tank;
 import doctrina.Canvas;
+import doctrina.CollidableRepository;
 import doctrina.Direction;
 import doctrina.MovableEntity;
 
@@ -12,6 +13,7 @@ public class Missile extends MovableEntity {
         setSpeed(7);
         tankDirection = tank.getDirection();
         initialize(tank);
+        CollidableRepository.getInstance().registerEntity(this);
     }
     @Override
     public void update() {
