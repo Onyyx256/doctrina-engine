@@ -1,6 +1,5 @@
 package footprint;
 
-import doctrina.Canvas;
 import doctrina.ControllableEntity;
 
 import java.awt.*;

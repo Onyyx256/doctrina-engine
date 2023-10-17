@@ -1,6 +1,5 @@
 package footprint;
 
-import doctrina.Canvas;
 import doctrina.Game;
 
 import java.awt.*;
@@ -39,7 +38,7 @@ public class FootprintGame extends Game {
     }
 
     @Override
-    protected void draw(Canvas canvas) {
+    protected void draw(java.awt.Canvas canvas) {
         canvas.drawRectangle(0, 0, 800, 600, Color.BLUE);
         drawFootprints(canvas);
         playerOne.draw(canvas);

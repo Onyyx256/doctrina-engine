@@ -1,7 +1,5 @@
 package movingrectangle;
 
-import doctrina.Canvas;
-
 import java.awt.*;
 
 public class Npc {

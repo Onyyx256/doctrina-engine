@@ -1,5 +1,4 @@
 package tank;
-import doctrina.Canvas;
 import doctrina.CollidableRepository;
 import doctrina.Direction;
 import doctrina.MovableEntity;

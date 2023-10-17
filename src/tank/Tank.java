@@ -1,6 +1,5 @@
 package tank;
 
-import doctrina.Canvas;
 import doctrina.ControllableEntity;
 import doctrina.MovementController;
 

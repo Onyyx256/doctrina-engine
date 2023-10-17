@@ -1,6 +1,5 @@
 package tank;
 
-import doctrina.Canvas;
 import doctrina.CollidableRepository;
 import doctrina.StaticEntity;
 
