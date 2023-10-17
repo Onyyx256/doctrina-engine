@@ -2,7 +2,6 @@ package tank;
 
 import doctrina.MovementController;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 public class GamePad extends MovementController {
