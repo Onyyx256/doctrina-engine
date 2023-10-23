@@ -26,7 +26,7 @@ public class VikingGame extends Game {
 
         try {
             Clip clip = AudioSystem.getClip();
-            AudioInputStream stream = AudioSystem.getAudioInputStream(this.getClass().getClassLoader().getResourceAsStream("audiosq/music.wav"));
+            AudioInputStream stream = AudioSystem.getAudioInputStream(this.getClass().getClassLoader().getResourceAsStream("audios/music.wav"));
             clip.open(stream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
@@ -53,14 +53,7 @@ public class VikingGame extends Game {
 
         if (gamePad.isFirePressed() && soundCooldown == 0) {
             soundCooldown = 100;
-            try {
-                Clip clip = AudioSystem.getClip();
-                AudioInputStream stream = AudioSystem.getAudioInputStream(this.getClass().getClassLoader().getResourceAsStream("audios/fire.wav"));
-                clip.open(stream);
-                clip.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            SoundEffect.MURLOC.play();
         }
     }
 
