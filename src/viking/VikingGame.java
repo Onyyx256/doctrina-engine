@@ -2,6 +2,7 @@ package viking;
 
 import doctrina.Canvas;
 import doctrina.Game;
+import doctrina.GameConfig;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -17,6 +18,7 @@ public class VikingGame extends Game {
     private int soundCooldown;
     @Override
     protected void initialize() {
+        GameConfig.enableDebug();
         gamePad = new GamePad();
         player = new Player(gamePad);
         player.teleport(200, 200);
