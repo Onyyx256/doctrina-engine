@@ -3,6 +3,7 @@ package viking;
 import doctrina.Canvas;
 import doctrina.Game;
 import doctrina.GameConfig;
+import doctrina.RenderingEngine;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -35,6 +36,9 @@ public class VikingGame extends Game {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        RenderingEngine.getInstance().getScreen().fullscreen();
+        RenderingEngine.getInstance().getScreen().hideCursor();
     }
 
     @Override
