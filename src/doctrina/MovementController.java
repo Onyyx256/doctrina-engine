@@ -8,7 +8,6 @@ public class MovementController extends Controller {
     private int downKey = KeyEvent.VK_DOWN;
     private int rightKey = KeyEvent.VK_RIGHT;
     private int leftKey = KeyEvent.VK_LEFT;
-    private int dashKey = KeyEvent.VK_SPACE;
 
     public MovementController() {
         bindKey(upKey);
@@ -17,15 +16,11 @@ public class MovementController extends Controller {
         bindKey(rightKey);
     }
 
-    public void useWASDKey() {
+    public void useWasdKeys() {
         setUpKey(KeyEvent.VK_W);
         setDownKey(KeyEvent.VK_S);
-        setRightKey(KeyEvent.VK_A);
-        setLeftKey(KeyEvent.VK_D);
-    }
-
-    public boolean isLeftPressed() {
-        return isKeyPressed(leftKey);
+        setLeftKey(KeyEvent.VK_A);
+        setRightKey(KeyEvent.VK_D);
     }
 
     public Direction getDirection() {
@@ -42,6 +37,10 @@ public class MovementController extends Controller {
             return Direction.DOWN;
         }
         return null;
+    }
+
+    public boolean isLeftPressed() {
+        return isKeyPressed(leftKey);
     }
 
     public boolean isRightPressed() {
@@ -83,11 +82,5 @@ public class MovementController extends Controller {
         removeKey(leftKey);
         bindKey(keyCode);
         this.leftKey = keyCode;
-    }
-
-    public void setDashKey(int keyCode) {
-        removeKey(dashKey);
-        bindKey(keyCode);
-        this.dashKey = keyCode;
     }
 }

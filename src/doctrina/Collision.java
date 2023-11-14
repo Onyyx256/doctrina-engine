@@ -21,7 +21,7 @@ public class Collision {
     }
 
     private int getAllowedUpSpeed() {
-        return distance(other ->  entity.y - (other.y + other.height));
+        return distance(other -> entity.y - (other.y + other.height));
     }
 
     private int getAllowedDownSpeed() {
@@ -36,18 +36,19 @@ public class Collision {
         return distance(other -> other.x - (entity.x + entity.width));
     }
 
-    private int distance(DisctanceCalculator calculator) {
+    private int distance(DistanceCalculator calculator) {
         Rectangle collisionBound = entity.getHitBox();
         int allowedDistance = entity.getSpeed();
         for (StaticEntity other : CollidableRepository.getInstance()) {
             if (collisionBound.intersects(other.getBounds())) {
-                allowedDistance = Math.min(allowedDistance, calculator.calculateWith(other));
+                allowedDistance = Math.min(allowedDistance,
+                        calculator.calculateWith(other));
             }
         }
         return allowedDistance;
     }
 
-    private interface DisctanceCalculator {
+    private interface DistanceCalculator {
         int calculateWith(StaticEntity other);
     }
 }

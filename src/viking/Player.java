@@ -14,10 +14,10 @@ public class Player extends ControllableEntity {
     private static final int ANIMATION_SPEED = 8;
 
     private BufferedImage spriteSheet;
-    private Image[] rightFrames;
-    private Image[] leftFrames;
-    private Image[] upFrames;
-    private Image[] downFrames;
+    private SpriteAnimation rightFrames;
+    private SpriteAnimation leftFrames;
+    private SpriteAnimation upFrames;
+    private SpriteAnimation downFrames;
     private int currentAnimationFrame = 1; // idle frame (middle)
     private int nextFrame = ANIMATION_SPEED;
 
@@ -36,9 +36,9 @@ public class Player extends ControllableEntity {
             --nextFrame;
             if (nextFrame == 0) {
                 ++currentAnimationFrame;
-                if (currentAnimationFrame >= leftFrames.length) {
-                    currentAnimationFrame = 0;
-                }
+                // if (currentAnimationFrame >= leftFrames.length) {
+                //    currentAnimationFrame = 0;
+                //}
                 nextFrame = ANIMATION_SPEED;
             }
         } else {
@@ -47,8 +47,8 @@ public class Player extends ControllableEntity {
     }
 
     @Override
-    public void draw(Canvas canvas) {
-        if (getDirection() == Direction.RIGHT) {
+     public void draw(Canvas canvas) {
+        /* if (getDirection() == Direction.RIGHT) {
             canvas.drawImage(rightFrames[currentAnimationFrame], x, y);
         } else if (getDirection() == Direction.LEFT) {
             canvas.drawImage(leftFrames[currentAnimationFrame], x, y);
@@ -56,7 +56,7 @@ public class Player extends ControllableEntity {
             canvas.drawImage(upFrames[currentAnimationFrame], x, y);
         } else if (getDirection() == Direction.DOWN) {
             canvas.drawImage(downFrames[currentAnimationFrame], x, y);
-        }
+        } */
         if (GameConfig.isDebugEnabled()) {
             drawHitBox(canvas);
         }
@@ -76,24 +76,9 @@ public class Player extends ControllableEntity {
     }
 
     private void loadAnimationFrames() {
-        downFrames = new Image[3];
-        downFrames[0] = spriteSheet.getSubimage(0, 128, width, height);
-        downFrames[1] = spriteSheet.getSubimage(32, 128, width, height);
-        downFrames[2] = spriteSheet.getSubimage(64, 128, width, height);
-
-        leftFrames = new Image[3];
-        leftFrames[0] = spriteSheet.getSubimage(0, 160, width, height);
-        leftFrames[1] = spriteSheet.getSubimage(32, 160, width, height);
-        leftFrames[2] = spriteSheet.getSubimage(64, 160, width, height);
-
-        rightFrames = new Image[3];
-        rightFrames[0] = spriteSheet.getSubimage(0, 192, width, height);
-        rightFrames[1] = spriteSheet.getSubimage(32, 192, width, height);
-        rightFrames[2] = spriteSheet.getSubimage(64, 192, width, height);
-
-        upFrames = new Image[3];
-        upFrames[0] = spriteSheet.getSubimage(0, 224, width, height);
-        upFrames[1] = spriteSheet.getSubimage(32, 224, width, height);
-        upFrames[2] = spriteSheet.getSubimage(64, 224, width, height);
+        downFrames = new SpriteAnimation(8, 48, 50);
+        leftFrames = new SpriteAnimation(8, 60, 62);
+        rightFrames = new SpriteAnimation(8, 72, 74);
+        upFrames = new SpriteAnimation(8, 84, 86);
     }
 }

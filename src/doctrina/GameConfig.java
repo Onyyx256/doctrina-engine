@@ -7,6 +7,7 @@ public class GameConfig {
     public static boolean isDebugEnabled() {
         return debug;
     }
+
     public static void enableDebug() {
         debug = true;
     }

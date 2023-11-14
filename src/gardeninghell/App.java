@@ -1,7 +1,7 @@
-package tank;
+package gardeninghell;
 
 public class App {
     public static void main(String[] args) {
-        new TankGame().start();
+        new GardeningHellGame().start();
     }
 }

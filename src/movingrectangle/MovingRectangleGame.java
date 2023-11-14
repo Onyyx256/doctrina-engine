@@ -1,6 +1,5 @@
 package movingrectangle;
 
-import doctrina.Controller;
 import doctrina.Game;
 
 import java.awt.*;

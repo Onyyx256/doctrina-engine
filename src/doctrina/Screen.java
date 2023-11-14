@@ -14,7 +14,7 @@ public class Screen {
 
     public Screen() {
         initializeFrame();
-        initializeIvisibleCursor();
+        initializeInvisibleCursor();
         initializeDevice();
     }
 
@@ -28,7 +28,7 @@ public class Screen {
     }
 
     public void hideCursor() {
-        frame.setCursor((invisibleCursor));
+        frame.setCursor(invisibleCursor);
     }
 
     public void showCursor() {
@@ -42,10 +42,11 @@ public class Screen {
         }
         frame.setSize(width, height);
         frame.setLocationRelativeTo(null);
-        if (frame.isVisible()) {
+        if (frameIsVisible) {
             frame.setVisible(true);
         }
-        fullscreenDisplayMode = findClosestDisplayMode(width, height);
+        //fullscreenDisplayMode = findClosestDisplayMode(width, height);
+        System.out.println("Fullscreen Mode: " + fullscreenDisplayMode.getWidth() + "x" + fullscreenDisplayMode.getHeight());
     }
 
     public void setPanel(JPanel panel) {
@@ -56,10 +57,15 @@ public class Screen {
         return isFullscreenMode ? fullscreenDisplayMode.getWidth() : frame.getWidth();
     }
 
+    public int getHeight() {
+        return isFullscreenMode ? fullscreenDisplayMode.getHeight() : frame.getHeight();
+    }
+
     public void fullscreen() {
         if (device.isFullScreenSupported()) {
             device.setFullScreenWindow(frame);
         }
+        //device.setDisplayMode(fullscreenDisplayMode);
         frame.setLocationRelativeTo(null);
         isFullscreenMode = true;
     }
@@ -71,11 +77,6 @@ public class Screen {
         //device.setDisplayMode(windowedDisplayMode);
         frame.setLocationRelativeTo(null);
         isFullscreenMode = false;
-    }
-
-
-    public int getHeight() {
-        return isFullscreenMode ? fullscreenDisplayMode.getHeight() : frame.getHeight();
     }
 
     private DisplayMode findClosestDisplayMode(int width, int height) {
@@ -102,7 +103,6 @@ public class Screen {
 
     private void initializeFrame() {
         frame = new JFrame();
-        frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setTitle("Doctrina Game");
@@ -112,15 +112,16 @@ public class Screen {
         frame.setUndecorated(true);
     }
 
-    private void initializeIvisibleCursor() {
+    private void initializeInvisibleCursor() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Point hotSopt = new Point(0, 0);
+        Point hotSpot = new Point(0, 0);
         BufferedImage cursorImage = new BufferedImage(1, 1, BufferedImage.TRANSLUCENT);
-        invisibleCursor = toolkit.createCustomCursor(cursorImage, hotSopt, "InvisibleCursor");
+        invisibleCursor = toolkit.createCustomCursor(cursorImage, hotSpot, "InvisibleCursor");
     }
 
     private void initializeDevice() {
         device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        fullscreenDisplayMode = device.getDisplayMode();
         // windowedDisplayMode = device.getDisplayMode();
     }
 }

@@ -14,12 +14,11 @@ public enum Direction {
         this.velocityY = velocityY;
     }
 
-    public int calculateVelocityX(int speed){
+    public int calculateVelocityX(int speed) {
         return velocityX * speed;
     }
 
-    public int calculateVelocityY(int speed){
+    public int calculateVelocityY(int speed) {
         return velocityY * speed;
     }
-
 }

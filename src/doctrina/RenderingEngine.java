@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 public class RenderingEngine {
 
     private static RenderingEngine instance;
-
     private JPanel panel;
     private BufferedImage bufferedImage;
     private Screen screen;
@@ -29,7 +28,7 @@ public class RenderingEngine {
     }
 
     public void stop() {
-        screen.start();
+        screen.stop();
     }
 
     public void addKeyListener(KeyListener keyListener) {
@@ -37,6 +36,7 @@ public class RenderingEngine {
     }
 
     public Canvas buildCanvas() {
+
         Graphics2D buffer = bufferedImage.createGraphics();
         buffer.setRenderingHints(buildRenderingHints());
         return new Canvas(buffer);
@@ -44,7 +44,10 @@ public class RenderingEngine {
 
     public void drawOnScreen() {
         Graphics2D graphics = (Graphics2D) panel.getGraphics();
-        graphics.drawImage(bufferedImage, 0, 0, screen.getWidth(), screen.getHeight(), 0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), null);
+        graphics.drawImage(bufferedImage, 0, 0,
+                screen.getWidth(), screen.getHeight(),
+                0, 0,
+                bufferedImage.getWidth(), bufferedImage.getHeight(), null);
         Toolkit.getDefaultToolkit().sync();
         graphics.dispose();
     }
@@ -74,6 +77,7 @@ public class RenderingEngine {
     private void initializeScreen() {
         screen = new Screen();
         screen.setSize(800, 600);
-        bufferedImage = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
+        bufferedImage = new BufferedImage(800, 600,
+                BufferedImage.TYPE_INT_RGB);
     }
 }

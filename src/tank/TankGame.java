@@ -8,14 +8,15 @@ import doctrina.StaticEntity;
 import java.util.ArrayList;
 
 public class TankGame extends Game {
+
     private Tank tank;
-    private GamePad gamePad = new GamePad();
+    private GamePad gamePad;
     private ArrayList<Missile> missiles;
     private ArrayList<Brick> bricks;
 
     @Override
     protected void initialize() {
-        GamePad gamePad = new GamePad();
+        gamePad = new GamePad();
         tank = new Tank(gamePad);
         missiles = new ArrayList<>();
         bricks = new ArrayList<>();
@@ -24,7 +25,6 @@ public class TankGame extends Game {
         bricks.add(new Brick(500, 132));
         bricks.add(new Brick(484, 148));
         bricks.add(new Brick(500, 164));
-
     }
 
     @Override

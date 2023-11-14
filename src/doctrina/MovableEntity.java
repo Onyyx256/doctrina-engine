@@ -38,27 +38,27 @@ public abstract class MovableEntity extends StaticEntity {
     }
 
     public void moveUp() {
-        move(direction.UP);
+        move(Direction.UP);
     }
 
     public void moveDown() {
-        move(direction.DOWN);
+        move(Direction.DOWN);
     }
 
     public void moveLeft() {
-        move(direction.LEFT);
+        move(Direction.LEFT);
     }
 
     public void moveRight() {
-        move(direction.RIGHT);
+        move(Direction.RIGHT);
     }
 
     public Rectangle getHitBox() {
         switch (direction) {
-            case UP:return getUpperHitBox();
-            case DOWN:return getLowerHitBox();
-            case LEFT:return getLeftHitBox();
-            case RIGHT:return getRightHitBox();
+            case UP: return getUpperHitBox();
+            case DOWN: return getLowerHitBox();
+            case LEFT: return getLeftHitBox();
+            case RIGHT: return getRightHitBox();
         }
         return getBounds();
     }
@@ -89,7 +89,8 @@ public abstract class MovableEntity extends StaticEntity {
     public void drawHitBox(Canvas canvas) {
         Rectangle rectangle = getHitBox();
         Color color = new Color(255, 0, 0, 200);
-        canvas.drawRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height, color);
+        canvas.drawRectangle(rectangle.x, rectangle.y,
+                rectangle.width, rectangle.height, color);
     }
 
     private Rectangle getUpperHitBox() {
