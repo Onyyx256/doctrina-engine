@@ -1,10 +1,12 @@
 package footprint;
 
+import doctrina.Canvas;
 import doctrina.ControllableEntity;
 
 import java.awt.*;
 
 public class Player extends ControllableEntity {
+
     private final Color color;
 
     public Player(GamePad gamePad, Color color) {
@@ -25,7 +27,7 @@ public class Player extends ControllableEntity {
     }
 
     @Override
-    public void draw(doctrina.Canvas canvas) {
-        canvas.drawRectangle(this, Color.WHITE);
+    public void draw(Canvas canvas) {
+        canvas.drawRectangle(this, color);
     }
 }

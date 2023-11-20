@@ -1,30 +1,68 @@
 package doctrina;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Cursor;
+import java.awt.DisplayMode;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Screen {
 
+    private static GraphicsDevice device;
     private JFrame frame;
+    private DisplayMode fullScreenDisplayMode;
+    //private DisplayMode windowedDisplayMode;
+    private boolean isFullScreenMode;
     private Cursor invisibleCursor;
-    private GraphicsDevice device;
-    private DisplayMode fullscreenDisplayMode;
-    private boolean isFullscreenMode;
 
     public Screen() {
         initializeFrame();
-        initializeInvisibleCursor();
+        initializeHiddenCursor();
         initializeDevice();
     }
 
-    public void start() {
-        frame.setVisible(true);
+    public void fullScreen() {
+        //if (device.isDisplayChangeSupported()) {
+        //System.out.println("Switching to : " + fullScreenDisplayMode.getWidth() + "x" + fullScreenDisplayMode.getHeight());
+        if (device.isFullScreenSupported()) {
+            device.setFullScreenWindow(frame);
+        }
+        //device.setDisplayMode(fullScreenDisplayMode);
+        frame.setLocationRelativeTo(null);
+        isFullScreenMode = true;
+        //}
     }
 
-    public void stop() {
-        frame.setVisible(false);
-        frame.dispose();
+    public void windowed() {
+        //if (device.isDisplayChangeSupported()) {
+        //System.out.println("Switching to : " + windowedDisplayMode.getWidth() + "x" + windowedDisplayMode.getHeight());
+        if (device.isFullScreenSupported()) {
+            device.setFullScreenWindow(null);
+        }
+        //device.setDisplayMode(windowedDisplayMode);
+        frame.setLocationRelativeTo(null);
+        isFullScreenMode = false;
+        //}
+    }
+
+    public int getWidth() {
+        return isFullScreenMode ? fullScreenDisplayMode.getWidth() : frame.getWidth();
+    }
+
+    public int getHeight() {
+        return isFullScreenMode ? fullScreenDisplayMode.getHeight() : frame.getHeight();
+    }
+
+    public void toggleFullScreen() {
+        if (isFullScreenMode) {
+            windowed();
+        } else {
+            fullScreen();
+        }
     }
 
     public void hideCursor() {
@@ -32,10 +70,18 @@ public class Screen {
     }
 
     public void showCursor() {
-        frame.setCursor(Cursor.getDefaultCursor());
+        frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 
-    public void setSize(int width, int height) {
+    protected void setPanel(JPanel panel) {
+        frame.add(panel);
+    }
+
+    protected void setTitle(String title) {
+        frame.setTitle(title);
+    }
+
+    protected void setSize(int width, int height) {
         boolean frameIsVisible = frame.isVisible();
         if (frameIsVisible) {
             frame.setVisible(false);
@@ -45,45 +91,24 @@ public class Screen {
         if (frameIsVisible) {
             frame.setVisible(true);
         }
-        //fullscreenDisplayMode = findClosestDisplayMode(width, height);
-        System.out.println("Fullscreen Mode: " + fullscreenDisplayMode.getWidth() + "x" + fullscreenDisplayMode.getHeight());
+        fullScreenDisplayMode = findClosestDisplayMode(width, height);
+        System.out.println("Fullscreen mode : " + fullScreenDisplayMode.getWidth() + "x" + fullScreenDisplayMode.getHeight());
     }
 
-    public void setPanel(JPanel panel) {
-        frame.add(panel);
+    protected void start() {
+        frame.setVisible(true);
     }
 
-    public int getWidth() {
-        return isFullscreenMode ? fullscreenDisplayMode.getWidth() : frame.getWidth();
-    }
-
-    public int getHeight() {
-        return isFullscreenMode ? fullscreenDisplayMode.getHeight() : frame.getHeight();
-    }
-
-    public void fullscreen() {
-        if (device.isFullScreenSupported()) {
-            device.setFullScreenWindow(frame);
-        }
-        //device.setDisplayMode(fullscreenDisplayMode);
-        frame.setLocationRelativeTo(null);
-        isFullscreenMode = true;
-    }
-
-    public void windowed() {
-        if (device.isFullScreenSupported()) {
-            device.setFullScreenWindow(null);
-        }
-        //device.setDisplayMode(windowedDisplayMode);
-        frame.setLocationRelativeTo(null);
-        isFullscreenMode = false;
+    protected void end() {
+        frame.setVisible(false);
+        frame.dispose();
     }
 
     private DisplayMode findClosestDisplayMode(int width, int height) {
         DisplayMode[] displayModes = device.getDisplayModes();
         int desiredResolution = width * height;
         int[] availableResolutions = new int[displayModes.length];
-        for (int i = 0; i < displayModes.length; i++) {
+        for (int i = 0; i < displayModes.length; ++i) {
             availableResolutions[i] = displayModes[i].getWidth() * displayModes[i].getHeight();
         }
         return displayModes[closestIndexOfValue(desiredResolution, availableResolutions)];
@@ -103,25 +128,23 @@ public class Screen {
 
     private void initializeFrame() {
         frame = new JFrame();
-        frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-        frame.setTitle("Doctrina Game");
+        frame.setUndecorated(true);
         frame.setIgnoreRepaint(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setState(JFrame.NORMAL);
-        frame.setUndecorated(true);
     }
 
-    private void initializeInvisibleCursor() {
+    private void initializeHiddenCursor() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Point hotSpot = new Point(0, 0);
+        Point hotSpot = new Point(0,0);
         BufferedImage cursorImage = new BufferedImage(1, 1, BufferedImage.TRANSLUCENT);
         invisibleCursor = toolkit.createCustomCursor(cursorImage, hotSpot, "InvisibleCursor");
     }
 
     private void initializeDevice() {
         device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        fullscreenDisplayMode = device.getDisplayMode();
-        // windowedDisplayMode = device.getDisplayMode();
+        //windowedDisplayMode = device.getDisplayMode();
+        //System.out.println("Windowed mode : " + windowedDisplayMode.getWidth() + "x" + windowedDisplayMode.getHeight());
     }
 }

@@ -6,12 +6,13 @@ import java.awt.event.KeyEvent;
 
 public class GamePad extends MovementController {
 
-    private int quitKey = KeyEvent.VK_Q;
+    private int quitKey = KeyEvent.VK_ESCAPE;
     private int dashKey = KeyEvent.VK_SPACE;
 
     public GamePad() {
         bindKey(quitKey);
         bindKey(dashKey);
+        useWasdKeys();
     }
 
     public boolean isQuitPressed() {

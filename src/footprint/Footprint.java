@@ -1,5 +1,6 @@
 package footprint;
 
+import doctrina.Canvas;
 import doctrina.StaticEntity;
 
 import java.awt.*;
@@ -13,7 +14,7 @@ public class Footprint extends StaticEntity {
     }
 
     @Override
-    public void draw(doctrina.Canvas canvas) {
+    public void draw(Canvas canvas) {
         Color color = new Color(getRandomValue(),
                 getRandomValue(), getRandomValue());
         canvas.drawRectangle(this, color);

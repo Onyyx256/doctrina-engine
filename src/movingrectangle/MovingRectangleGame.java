@@ -1,5 +1,6 @@
 package movingrectangle;
 
+import doctrina.Canvas;
 import doctrina.Game;
 
 import java.awt.*;
@@ -22,15 +23,14 @@ public class MovingRectangleGame extends Game {
         if (gamePad.isQuitPressed()) {
             stop();
         }
-        player.update(gamePad.isSprintPressed());
+        player.update();
         npc.update();
     }
 
     @Override
-    protected void draw(doctrina.Canvas canvas) {
+    protected void draw(Canvas canvas) {
         canvas.drawRectangle(0, 0, 800, 600, Color.BLUE);
         player.draw(canvas);
         npc.draw(canvas);
     }
-
 }

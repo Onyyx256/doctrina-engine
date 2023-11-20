@@ -28,7 +28,7 @@ public class RenderingEngine {
     }
 
     public void stop() {
-        screen.stop();
+        screen.end();
     }
 
     public void addKeyListener(KeyListener keyListener) {
@@ -36,7 +36,8 @@ public class RenderingEngine {
     }
 
     public Canvas buildCanvas() {
-
+        bufferedImage = new BufferedImage(800, 600,
+                BufferedImage.TYPE_INT_RGB);
         Graphics2D buffer = bufferedImage.createGraphics();
         buffer.setRenderingHints(buildRenderingHints());
         return new Canvas(buffer);
@@ -44,20 +45,23 @@ public class RenderingEngine {
 
     public void drawOnScreen() {
         Graphics2D graphics = (Graphics2D) panel.getGraphics();
-        graphics.drawImage(bufferedImage, 0, 0,
-                screen.getWidth(), screen.getHeight(),
-                0, 0,
-                bufferedImage.getWidth(), bufferedImage.getHeight(), null);
+        graphics.drawImage(bufferedImage, 0, 0, screen.getWidth(), screen.getHeight(), 0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), null);
         Toolkit.getDefaultToolkit().sync();
         graphics.dispose();
     }
 
     private void initializePanel() {
         panel = new JPanel();
-        panel.setBackground(Color.BLUE);
+        panel.setBackground(Color.blue);
         panel.setFocusable(true);
         panel.setDoubleBuffered(true);
         screen.setPanel(panel);
+    }
+
+    private void initializeFrame() {
+        screen = new Screen();
+        screen.setSize(800, 600);
+        screen.setTitle("Doctrina game");
     }
 
     private RenderingHints buildRenderingHints() {
@@ -70,14 +74,7 @@ public class RenderingEngine {
     }
 
     private RenderingEngine() {
-        initializeScreen();
+        initializeFrame();
         initializePanel();
-    }
-
-    private void initializeScreen() {
-        screen = new Screen();
-        screen.setSize(800, 600);
-        bufferedImage = new BufferedImage(800, 600,
-                BufferedImage.TYPE_INT_RGB);
     }
 }

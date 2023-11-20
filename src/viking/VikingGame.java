@@ -8,7 +8,6 @@ import doctrina.RenderingEngine;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
 
 public class VikingGame extends Game {
 
@@ -17,9 +16,10 @@ public class VikingGame extends Game {
     private World world;
     private Tree tree;
     private int soundCooldown;
+
     @Override
     protected void initialize() {
-        GameConfig.enableDebug();
+        //GameConfig.enableDebug();
         gamePad = new GamePad();
         player = new Player(gamePad);
         player.teleport(200, 200);
@@ -29,7 +29,8 @@ public class VikingGame extends Game {
 
         try {
             Clip clip = AudioSystem.getClip();
-            AudioInputStream stream = AudioSystem.getAudioInputStream(this.getClass().getClassLoader().getResourceAsStream("audios/music.wav"));
+            AudioInputStream stream = AudioSystem.getAudioInputStream(
+                    this.getClass().getClassLoader().getResourceAsStream("audios/music.wav"));
             clip.open(stream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
@@ -37,7 +38,7 @@ public class VikingGame extends Game {
             e.printStackTrace();
         }
 
-        RenderingEngine.getInstance().getScreen().fullscreen();
+        RenderingEngine.getInstance().getScreen().toggleFullScreen();
         RenderingEngine.getInstance().getScreen().hideCursor();
     }
 
@@ -52,6 +53,7 @@ public class VikingGame extends Game {
         } else {
             tree.blockadeFromBottom();
         }
+
         soundCooldown--;
         if (soundCooldown < 0) {
             soundCooldown = 0;
@@ -66,7 +68,7 @@ public class VikingGame extends Game {
     @Override
     protected void draw(Canvas canvas) {
         world.draw(canvas);
-        // tree height (80) - max for layer switch (28)
+        // 80 (tree height) - 28 (max for layer switch)
         if (player.getY() < tree.getY() + 52) {
             player.draw(canvas);
             tree.draw(canvas);

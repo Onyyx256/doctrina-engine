@@ -8,6 +8,7 @@ public enum SoundEffect {
 
     FIRE("audios/fire.wav"),
     MURLOC("audios/murloc.wav");
+
     private String path;
 
     SoundEffect(String path) {
@@ -17,7 +18,8 @@ public enum SoundEffect {
     public void play() {
         try {
             Clip clip = AudioSystem.getClip();
-            AudioInputStream stream = AudioSystem.getAudioInputStream(this.getClass().getClassLoader().getResourceAsStream(path));
+            AudioInputStream stream = AudioSystem.getAudioInputStream(
+                    this.getClass().getClassLoader().getResourceAsStream(path));
             clip.open(stream);
             clip.start();
         } catch (Exception e) {

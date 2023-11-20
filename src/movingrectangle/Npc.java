@@ -1,5 +1,7 @@
 package movingrectangle;
 
+import doctrina.Canvas;
+
 import java.awt.*;
 
 public class Npc {
@@ -46,7 +48,7 @@ public class Npc {
         }
     }
 
-    public void draw(doctrina.Canvas canvas) {
+    public void draw(Canvas canvas) {
         canvas.drawRectangle(x, y, 10, 10, Color.YELLOW);
     }
 }

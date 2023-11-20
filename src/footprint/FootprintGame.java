@@ -1,5 +1,6 @@
 package footprint;
 
+import doctrina.Canvas;
 import doctrina.Game;
 
 import java.awt.*;
@@ -17,7 +18,8 @@ public class FootprintGame extends Game {
     protected void initialize() {
         footprints = new ArrayList<>();
         gamePadOne = new GamePad();
-        gamePadOne = new GamePad();
+        gamePadTwo = new GamePad();
+        gamePadTwo.useWasdKeys();
         playerOne = new Player(gamePadOne, Color.WHITE);
         playerTwo = new Player(gamePadTwo, Color.YELLOW);
     }
@@ -38,14 +40,14 @@ public class FootprintGame extends Game {
     }
 
     @Override
-    protected void draw(doctrina.Canvas canvas) {
+    protected void draw(Canvas canvas) {
         canvas.drawRectangle(0, 0, 800, 600, Color.BLUE);
         drawFootprints(canvas);
         playerOne.draw(canvas);
         playerTwo.draw(canvas);
     }
 
-    private void drawFootprints(doctrina.Canvas canvas) {
+    private void drawFootprints(Canvas canvas) {
         for (Footprint footprint : footprints) {
             footprint.draw(canvas);
         }
