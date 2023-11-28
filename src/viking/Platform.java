@@ -9,19 +9,32 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
-public class Tree extends StaticEntity {
-
+public class Platform extends StaticEntity {
     private static final String SPRITE_PATH = "images/tree.png";
+    private Blockade blockade;
     private Image image;
-
-    public Tree(int x, int y) {
+    public Platform(int x, int y) {
         teleport(x, y);
+        setDimension(60, 12);
+        blockade = new Blockade();
+        blockade.teleport(x, y);
         load();
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawImage(image, x, y);
+        canvas.drawRectangle(this, Color.CYAN);
+        if (GameConfig.isDebugEnabled() && blockade != null) {
+            blockade.draw(canvas);
+        }
+    }
+
+    public void enableBlockade() {
+        blockade.setDimension(60, 12);
+    }
+
+    public void disableBlockade() {
+        blockade.setDimension(0, 0);
     }
 
     private void load() {

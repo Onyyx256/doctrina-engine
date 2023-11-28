@@ -56,8 +56,7 @@ public class MovementController extends Controller {
     }
 
     public boolean isMoving() {
-        return isDownPressed() || isLeftPressed()
-                || isRightPressed() || isUpPressed();
+        return isDownPressed() || isLeftPressed() || isRightPressed() || isUpPressed();
     }
 
     public void setDownKey(int keyCode) {

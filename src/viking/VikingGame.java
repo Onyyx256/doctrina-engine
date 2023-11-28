@@ -1,6 +1,5 @@
 package viking;
 
-import doctrina.Canvas;
 import doctrina.Game;
 import doctrina.GameConfig;
 import doctrina.RenderingEngine;
@@ -15,30 +14,34 @@ public class VikingGame extends Game {
     private GamePad gamePad;
     private World world;
     private Tree tree;
+    private Platform platform;
     private int soundCooldown;
 
     @Override
     protected void initialize() {
-        //GameConfig.enableDebug();
+        GameConfig.enableDebug();
         gamePad = new GamePad();
         player = new Player(gamePad);
-        player.teleport(200, 200);
+        player.teleport(200, 396);
         world = new World();
         world.load();
         tree = new Tree(300, 350);
+        platform = new Platform(250, 200);
 
-        try {
-            Clip clip = AudioSystem.getClip();
-            AudioInputStream stream = AudioSystem.getAudioInputStream(
-                    this.getClass().getClassLoader().getResourceAsStream("audios/music.wav"));
-            clip.open(stream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-            clip.start();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!GameConfig.isDebugEnabled()) {
+            try {
+                Clip clip = AudioSystem.getClip();
+                AudioInputStream stream = AudioSystem.getAudioInputStream(
+                        this.getClass().getClassLoader().getResourceAsStream("audios/music.wav"));
+                clip.open(stream);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+                clip.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        RenderingEngine.getInstance().getScreen().toggleFullScreen();
+        // RenderingEngine.getInstance().getScreen().toggleFullScreen();
         RenderingEngine.getInstance().getScreen().hideCursor();
     }
 
@@ -48,10 +51,10 @@ public class VikingGame extends Game {
             stop();
         }
         player.update();
-        if (player.getY() < tree.getY() + 52) {
-            tree.blockadeFromTop();
+        if (player.getY() < platform.getY() - 31) {
+            platform.enableBlockade();
         } else {
-            tree.blockadeFromBottom();
+            platform.disableBlockade();
         }
 
         soundCooldown--;
@@ -66,9 +69,10 @@ public class VikingGame extends Game {
     }
 
     @Override
-    protected void draw(Canvas canvas) {
+    protected void draw(doctrina.Canvas canvas) {
         world.draw(canvas);
         // 80 (tree height) - 28 (max for layer switch)
+        platform.draw(canvas);
         if (player.getY() < tree.getY() + 52) {
             player.draw(canvas);
             tree.draw(canvas);
