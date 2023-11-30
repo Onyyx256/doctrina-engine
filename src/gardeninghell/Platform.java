@@ -28,11 +28,19 @@ public class Platform extends StaticEntity {
         }
     }
 
-    public void enableBlockade() {
+    public void updateBlockade(int playerY) {
+        if (playerY < this.getY() - 31) {
+            this.enableBlockade();
+        } else {
+            this.disableBlockade();
+        }
+    }
+
+    private void enableBlockade() {
         blockade.setDimension(WIDTH, HEIGHT);
     }
 
-    public void disableBlockade() {
+    private void disableBlockade() {
         blockade.setDimension(0, 0);
     }
 }
