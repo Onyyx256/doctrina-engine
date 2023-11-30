@@ -24,7 +24,8 @@ public class Player extends ControllableEntity {
     public Player(MovementController controller) {
         super(controller);
         setDimension(32, 32);
-        setSpeed(3);
+        setXSpeed(3);
+        setYSpeed(3);
         load();
     }
 

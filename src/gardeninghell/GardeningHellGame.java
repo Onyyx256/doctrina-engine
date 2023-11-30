@@ -2,10 +2,7 @@ package gardeninghell;
 
 import doctrina.Canvas;
 import doctrina.Game;
-
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 public class GardeningHellGame extends Game {
     private GamePad gamePad;
@@ -38,6 +35,10 @@ public class GardeningHellGame extends Game {
         for (Platform value : floor) {
             value.updateBlockade(player.getY());
         }
+
+        if (!player.isDownBumping() && !gamePad.isUpPressed()) {
+            applyGravity();
+        }
     }
 
     @Override
@@ -48,5 +49,9 @@ public class GardeningHellGame extends Game {
         for (Platform value : floor) {
             value.draw(canvas);
         }
+    }
+
+    private void applyGravity() {
+        player.setYSpeed((int) (player.getXSpeed() * -0.75));
     }
 }

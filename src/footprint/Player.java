@@ -13,7 +13,8 @@ public class Player extends ControllableEntity {
         super(gamePad);
         teleport(200, 200);
         setDimension(20, 60);
-        setSpeed(3);
+        setXSpeed(3);
+        setYSpeed(3);
         this.color = color;
     }
 

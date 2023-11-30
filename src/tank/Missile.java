@@ -12,7 +12,8 @@ public class Missile extends MovableEntity {
     private final Direction tankDirection;
 
     public Missile(Tank tank) {
-        setSpeed(5);
+        setXSpeed(5);
+        setYSpeed(5);
         tankDirection = tank.getDirection();
         initialize(tank);
         CollidableRepository.getInstance().registerEntity(this);

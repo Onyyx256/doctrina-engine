@@ -8,10 +8,12 @@ import doctrina.MovementController;
 import java.awt.*;
 
 public class Player extends ControllableEntity {
+    private boolean downBumping = true;
     public Player(MovementController controller) {
         super(controller);
         setDimension(32, 32);
-        setSpeed(4);
+        setYSpeed(4);
+        setXSpeed(4);
     }
 
     public void update() {
@@ -25,5 +27,9 @@ public class Player extends ControllableEntity {
         if (GameConfig.isDebugEnabled()) {
             drawHitBox(canvas);
         }
+    }
+
+    public boolean isDownBumping() {
+        return downBumping;
     }
 }

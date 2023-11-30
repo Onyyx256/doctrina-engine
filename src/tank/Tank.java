@@ -13,7 +13,8 @@ public class Tank extends ControllableEntity {
     public Tank(MovementController controller) {
         super(controller);
         setDimension(30, 30);
-        setSpeed(2);
+        setYSpeed(2);
+        setXSpeed(2);
         teleport(100, 100);
     }
 

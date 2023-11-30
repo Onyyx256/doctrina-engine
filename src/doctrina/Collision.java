@@ -38,11 +38,15 @@ public class Collision {
 
     private int distance(DistanceCalculator calculator) {
         Rectangle collisionBound = entity.getHitBox();
-        int allowedDistance = entity.getSpeed();
+
+        int allowedDistance = entity.getXSpeed();
+        if (entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
+            allowedDistance = entity.getYSpeed();
+        }
+
         for (StaticEntity other : CollidableRepository.getInstance()) {
             if (collisionBound.intersects(other.getBounds())) {
-                allowedDistance = Math.min(allowedDistance,
-                        calculator.calculateWith(other));
+                allowedDistance = Math.min(allowedDistance, calculator.calculateWith(other));
             }
         }
         return allowedDistance;

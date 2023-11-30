@@ -4,7 +4,9 @@ import java.awt.*;
 
 public abstract class MovableEntity extends StaticEntity {
 
-    private int speed = 1;
+    private int xSpeed = 1;
+
+    private int ySpeed = 1;
     private Direction direction = Direction.UP;
     private Collision collision;
     private int lastX = Integer.MIN_VALUE;
@@ -63,12 +65,20 @@ public abstract class MovableEntity extends StaticEntity {
         return getBounds();
     }
 
-    public int getSpeed() {
-        return speed;
+    public int getXSpeed() {
+        return xSpeed;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public int getYSpeed() {
+        return ySpeed;
+    }
+
+    public void setYSpeed(int speed) {
+        this.ySpeed = speed;
+    }
+
+    public void setXSpeed(int speed) {
+        this.xSpeed = speed;
     }
 
     public Direction getDirection() {
@@ -94,18 +104,18 @@ public abstract class MovableEntity extends StaticEntity {
     }
 
     private Rectangle getUpperHitBox() {
-        return new Rectangle(x, y - speed, width, speed);
+        return new Rectangle(x, y - ySpeed, width, ySpeed);
     }
 
     private Rectangle getLowerHitBox() {
-        return new Rectangle(x, y + height, width, speed);
+        return new Rectangle(x, y + height, width, ySpeed);
     }
 
     private Rectangle getLeftHitBox() {
-        return new Rectangle(x - speed, y, speed, height);
+        return new Rectangle(x - xSpeed, y, xSpeed, height);
     }
 
     private Rectangle getRightHitBox() {
-        return new Rectangle(x + width, y, speed, height);
+        return new Rectangle(x + width, y, xSpeed, height);
     }
 }
